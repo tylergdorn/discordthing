@@ -9,6 +9,8 @@ import qualified Data.Text.IO as TIO
 import Discord
 import Discord.Types
 import qualified Discord.Requests as R
+import qualified Discord.Internal.Rest.Channel as C
+import qualified Discord.Internal.Rest.Prelude as P
 
 -- Allows this code to be an executable. See discord-haskell.cabal
 main :: IO ()
@@ -23,7 +25,8 @@ pingpongExample = do
   t <- runDiscord $ def { discordToken = tok
                         , discordOnStart = startHandler
                         , discordOnEnd = putStrLn "Ended"
-                        , discordOnEvent = eventHandler
+                        -- , discordOnEvent = eventHandler
+                        , discordOnEvent = spotifyEventHandler
                         , discordOnLog = \s -> TIO.putStrLn s >> TIO.putStrLn ""
                         }
   threadDelay (1 `div` 10 * 10^6)
@@ -38,7 +41,7 @@ startHandler dis = do
   forM_ partialGuilds $ \pg -> do
     Right guild <- restCall dis $ R.GetGuild (partialGuildId pg)
     Right chans <- restCall dis $ R.GetGuildChannels (guildId guild)
-    case filter isTextChannel chans of
+    case filter (\x -> isTextChannel x && channelName x == "music" ) chans of
       (c:_) -> do _ <- restCall dis $ R.CreateMessage (channelId c) "Hello! I will reply to pings with pongs"
                   pure ()
       _ -> pure ()
@@ -53,8 +56,15 @@ eventHandler dis event = case event of
         pure ()
       _ -> pure ()
 
+spotifyEventHandler :: DiscordHandle -> Event -> IO ()
+spotifyEventHandler dis event = case event of
+    MessageCreate m -> do 
+        channelName <- getChannelName dis m
+        when (channelName == "music") $ print (messageText m)
+    _ -> pure ()
+
 isTextChannel :: Channel -> Bool
-isTextChannel (ChannelText {}) = True
+isTextChannel ChannelText {} = True
 isTextChannel _ = False
 
 fromBot :: Message -> Bool
@@ -62,3 +72,11 @@ fromBot m = userIsBot (messageAuthor m)
 
 isPing :: Message -> Bool
 isPing = ("ping" `T.isPrefixOf`) . T.map toLower . messageText
+
+getSpotifyLink :: Message -> Maybe String
+getSpotifyLink = undefined
+
+getChannelName :: Message -> DiscordHandle -> IO String
+getChannelName m = do 
+    either <- restCall dis (R.GetChannel (messageChannel m)
+
