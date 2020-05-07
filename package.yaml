@@ -24,6 +24,7 @@ dependencies:
 - emoji
 - discord-haskell
 - text
+- regex-pcre
 
 library:
   source-dirs: src

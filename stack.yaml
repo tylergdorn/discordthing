@@ -47,6 +47,8 @@ extra-deps:
     - http-client-0.6.4.1@sha256:ea569e3ebc00e7bb68162fbdf85aa63e653b974eaff63df7b972e4296687e25c,5322
     - req-3.1.0@sha256:c42bf205421a3a07749c725d1a9ebd494dd577cd2f7f62e7ff26a98b3229da1c,4800
     - retry-0.8.1.0@sha256:a964bc798d9f3cb6020721e7992c1dce71c49cbbdc5c110038ccf9d1da59884d,2207
+    - regex-pcre-0.95.0.0
+    - regex-base-0.94.0.0@sha256:44aa95ca762294ffbb28cf0af9c567d93b5d2c56e4f38ce5385a257d899f968e,2253
 
 # Override default flag values for local packages and extra-deps
 # flags: {}

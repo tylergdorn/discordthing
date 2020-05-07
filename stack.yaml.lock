@@ -39,6 +39,20 @@ packages:
       sha256: d2661a954fe017b9fcf60fba9226d66e1179983892fd255cd7279c12b8c820e8
   original:
     hackage: retry-0.8.1.0@sha256:a964bc798d9f3cb6020721e7992c1dce71c49cbbdc5c110038ccf9d1da59884d,2207
+- completed:
+    hackage: regex-pcre-0.95.0.0@sha256:60d9758a6841b0761f3dd7f90206511574dc7ee60f53bf5a9a066b967ddd5225,1937
+    pantry-tree:
+      size: 634
+      sha256: be80abf4eda01a83006aa14e0e82b1221f82ee6f25aa2f27e83432501c4c7d63
+  original:
+    hackage: regex-pcre-0.95.0.0
+- completed:
+    hackage: regex-base-0.94.0.0@sha256:44aa95ca762294ffbb28cf0af9c567d93b5d2c56e4f38ce5385a257d899f968e,2253
+    pantry-tree:
+      size: 483
+      sha256: 627ad9d564650590654720934224090a4e8fc3225e84a7fd1af83bc86b2d446a
+  original:
+    hackage: regex-base-0.94.0.0@sha256:44aa95ca762294ffbb28cf0af9c567d93b5d2c56e4f38ce5385a257d899f968e,2253
 snapshots:
 - completed:
     size: 524154

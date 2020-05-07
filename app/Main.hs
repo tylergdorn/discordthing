@@ -5,12 +5,13 @@ import Control.Concurrent (threadDelay)
 import Data.Char (toLower)
 import qualified Data.Text as T
 import qualified Data.Text.IO as TIO
+import Text.Printf
+import Spotify
+import System.IO
 
 import Discord
 import Discord.Types
 import qualified Discord.Requests as R
-import qualified Discord.Internal.Rest.Channel as C
-import qualified Discord.Internal.Rest.Prelude as P
 
 -- Allows this code to be an executable. See discord-haskell.cabal
 main :: IO ()
@@ -47,21 +48,37 @@ startHandler dis = do
       _ -> pure ()
 
 -- If an event handler throws an exception, discord-haskell will continue to run
-eventHandler :: DiscordHandle -> Event -> IO ()
-eventHandler dis event = case event of
-      MessageCreate m -> when (not (fromBot m) && isPing m) $ do
-        _ <- restCall dis (R.CreateReaction (messageChannel m, messageId m) "eyes")
-        threadDelay (4 * 10^6)
-        _ <- restCall dis (R.CreateMessage (messageChannel m) "Pong!")
-        pure ()
-      _ -> pure ()
+-- eventHandler :: DiscordHandle -> Event -> IO ()
+-- eventHandler dis event = case event of
+--       MessageCreate m -> when (not (fromBot m) && isPing m) $ do
+--         _ <- restCall dis (R.CreateReaction (messageChannel m, messageId m) "eyes")
+--         threadDelay (4 * 10^6)
+--         _ <- restCall dis (R.CreateMessage (messageChannel m) "Pong!")
+--         pure ()
+--       _ -> pure ()
+
+
+isMusicChannel :: Maybe T.Text -> Bool
+isMusicChannel m = case m of
+    Just t -> t == ("music" :: T.Text)
+    Nothing -> False
 
 spotifyEventHandler :: DiscordHandle -> Event -> IO ()
 spotifyEventHandler dis event = case event of
     MessageCreate m -> do 
         channelName <- getChannelName dis m
-        when (channelName == "music") $ print (messageText m)
+        when (isMusicChannel channelName) $ spotifyMessageProcess m
     _ -> pure ()
+
+spotifyMessageProcess :: Message -> IO ()
+spotifyMessageProcess m = 
+    let text = messageText m 
+        spotifyUrl = getSpotifyLink text
+        user = userName $ messageAuthor m
+    in case spotifyUrl of
+        Just url -> printf "username: %s \nlink: %s\n" user url >> hFlush stdout
+        Nothing -> pure ()
+
 
 isTextChannel :: Channel -> Bool
 isTextChannel ChannelText {} = True
@@ -70,13 +87,10 @@ isTextChannel _ = False
 fromBot :: Message -> Bool
 fromBot m = userIsBot (messageAuthor m)
 
-isPing :: Message -> Bool
-isPing = ("ping" `T.isPrefixOf`) . T.map toLower . messageText
-
-getSpotifyLink :: Message -> Maybe String
-getSpotifyLink = undefined
-
-getChannelName :: Message -> DiscordHandle -> IO String
-getChannelName m = do 
-    either <- restCall dis (R.GetChannel (messageChannel m)
+getChannelName :: DiscordHandle -> Message -> IO (Maybe T.Text)
+getChannelName dis m = do
+    restResult <- restCall dis (R.GetChannel (messageChannel m))
+    case restResult of
+        Right res -> return (Just (channelName res))
+        Left _ -> return Nothing
 
