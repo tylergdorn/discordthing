@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 964369a028603a4849f72b5f900f31569edbe0d43d13f35c0bef2d28f0e67305
+-- hash: 0a5564962315bf5d386cf892f07302d2cdeb35c2a73b8801e5d7fe4c9b77f25b
 
 name:           discord2
 version:        0.1.0.0
@@ -29,16 +29,21 @@ library
   exposed-modules:
       Lib
       Spotify
+      SpotifyAuth
   other-modules:
       Paths_discord2
   hs-source-dirs:
       src
   build-depends:
       base >=4.7 && <5
+    , bytestring
     , discord-haskell
     , emoji
+    , hoauth2
+    , mtl
     , regex-pcre
     , text
+    , uri-bytestring
   default-language: Haskell2010
 
 executable discord2-exe
@@ -50,11 +55,15 @@ executable discord2-exe
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
+    , bytestring
     , discord-haskell
     , discord2
     , emoji
+    , hoauth2
+    , mtl
     , regex-pcre
     , text
+    , uri-bytestring
   default-language: Haskell2010
 
 test-suite discord2-test
@@ -67,9 +76,13 @@ test-suite discord2-test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
+    , bytestring
     , discord-haskell
     , discord2
     , emoji
+    , hoauth2
+    , mtl
     , regex-pcre
     , text
+    , uri-bytestring
   default-language: Haskell2010

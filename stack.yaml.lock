@@ -53,6 +53,13 @@ packages:
       sha256: 627ad9d564650590654720934224090a4e8fc3225e84a7fd1af83bc86b2d446a
   original:
     hackage: regex-base-0.94.0.0@sha256:44aa95ca762294ffbb28cf0af9c567d93b5d2c56e4f38ce5385a257d899f968e,2253
+- completed:
+    hackage: hoauth2-1.12.0@sha256:3a7358e09de0ac3f8c738a3391c7e20d7e8b0038a21701c8cf68e7b1c32632d6,5628
+    pantry-tree:
+      size: 2046
+      sha256: 2a5e030a8d8871f60bdfb1fa74fa36f906a490f4a3fd109d9430f10c02fd91e2
+  original:
+    hackage: hoauth2-1.12.0
 snapshots:
 - completed:
     size: 524154

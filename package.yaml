@@ -25,6 +25,10 @@ dependencies:
 - discord-haskell
 - text
 - regex-pcre
+- hoauth2
+- uri-bytestring
+- bytestring
+- mtl
 
 library:
   source-dirs: src

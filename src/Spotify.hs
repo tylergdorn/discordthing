@@ -7,7 +7,7 @@ import Data.Text.Encoding as E
 getGroups :: (String, String, String, [String]) -> [String]
 getGroups (_, _, _, g) = g
 
--- | getSpotifyLink returns the part of a spotify url after open.spotify.com
+-- |getSpotifyLink returns the part of a spotify url after open.spotify.com
 getSpotifyLink :: T.Text -> Maybe T.Text
 getSpotifyLink str = 
     let regex = ".*open.spotify.com\\/([^\\s]*)" 
@@ -17,3 +17,4 @@ getSpotifyLink str =
         groups = getGroups x
         elem = if null groups then Nothing else Just (T.pack (head groups))
     in elem
+
