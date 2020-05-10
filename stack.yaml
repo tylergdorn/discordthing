@@ -50,6 +50,7 @@ extra-deps:
     - regex-pcre-0.95.0.0
     - regex-base-0.94.0.0@sha256:44aa95ca762294ffbb28cf0af9c567d93b5d2c56e4f38ce5385a257d899f968e,2253
     - hoauth2-1.12.0
+    - wai-3.2.2.1
 
 # Override default flag values for local packages and extra-deps
 # flags: {}

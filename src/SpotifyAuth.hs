@@ -58,6 +58,6 @@ getSpotifyConfig creds = let id = spotifyID creds
                              secret = spotifySecret creds
                              authuri = castToURI "https://accounts.spotify.com/authorize"
                              tokenuri = castToURI "https://accounts.spotify.com/api/token"
-                             callback = castToURI "https://localhost:8000/callback"
+                             callback = castToURI "http://localhost:8000/callback"
                              auth = OAuth2 (T.pack id) (Just (T.pack secret)) authuri tokenuri (Just callback)
                          in auth

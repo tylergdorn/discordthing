@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.31.2.
+-- This file has been generated from package.yaml by hpack version 0.33.0.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 0a5564962315bf5d386cf892f07302d2cdeb35c2a73b8801e5d7fe4c9b77f25b
+-- hash: 736f0e88133f5ee160b35094a23dffe478d498831a4d2c181a557c400ce73e04
 
 name:           discord2
 version:        0.1.0.0
@@ -44,6 +44,7 @@ library
     , regex-pcre
     , text
     , uri-bytestring
+    , wai
   default-language: Haskell2010
 
 executable discord2-exe
@@ -64,6 +65,7 @@ executable discord2-exe
     , regex-pcre
     , text
     , uri-bytestring
+    , wai
   default-language: Haskell2010
 
 test-suite discord2-test
@@ -85,4 +87,5 @@ test-suite discord2-test
     , regex-pcre
     , text
     , uri-bytestring
+    , wai
   default-language: Haskell2010

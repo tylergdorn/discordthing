@@ -60,6 +60,13 @@ packages:
       sha256: 2a5e030a8d8871f60bdfb1fa74fa36f906a490f4a3fd109d9430f10c02fd91e2
   original:
     hackage: hoauth2-1.12.0
+- completed:
+    hackage: wai-3.2.2.1@sha256:3f8fcbd4dec70fb549f1f9ec2b038df215a30afd74c01c1d36ecb85845115ba3,1765
+    pantry-tree:
+      size: 485
+      sha256: de2162f984227d9d0cc27b7f0a9b30cc03ef2670028bd40fa8c55fee7b92f000
+  original:
+    hackage: wai-3.2.2.1
 snapshots:
 - completed:
     size: 524154

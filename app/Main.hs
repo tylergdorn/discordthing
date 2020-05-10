@@ -6,7 +6,7 @@ import Data.Char (toLower)
 import qualified Data.Text as T
 import qualified Data.Text.IO as TIO
 import Text.Printf
-import Spotify
+import Spotify as S
 import System.IO
 
 import Discord
@@ -20,7 +20,8 @@ main = pingpongExample
 -- | Replies "pong" to every message that starts with "ping"
 pingpongExample :: IO ()
 pingpongExample = do
-  tok <- TIO.readFile "./auth-token.secret"
+  tok <- TIO.readFile "./auth-token.secret" 
+  _ <- S.printSpotifyUrl
 
   -- open ghci and run  [[ :info RunDiscordOpts ]] to see available fields
   t <- runDiscord $ def { discordToken = tok
@@ -73,7 +74,7 @@ spotifyEventHandler dis event = case event of
 spotifyMessageProcess :: Message -> IO ()
 spotifyMessageProcess m = 
     let text = messageText m 
-        spotifyUrl = getSpotifyLink text
+        spotifyUrl = S.getSpotifyLink text
         user = userName $ messageAuthor m
     in case spotifyUrl of
         Just url -> printf "username: %s \nlink: %s\n" user url >> hFlush stdout

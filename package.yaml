@@ -29,6 +29,7 @@ dependencies:
 - uri-bytestring
 - bytestring
 - mtl
+- wai
 
 library:
   source-dirs: src
